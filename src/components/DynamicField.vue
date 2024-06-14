@@ -15,6 +15,11 @@ interface EmitType {
 const { modelValue, isLast, placeholder, isMatch, vowels } = defineProps<PropsType>()
 const emit = defineEmits<EmitType>()
 
+const handleInput = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    emit('update:modelValue', target.value)
+}
+
 </script>
 
 <template>
@@ -25,7 +30,7 @@ const emit = defineEmits<EmitType>()
         <div class="dynamic-field__action">
             <input
                 :value="modelValue"
-                @input="emit('update:modelValue', $event.target?.value)"
+                @input="handleInput"
                 :placeholder="placeholder"
                 :style="{backgroundColor: isMatch ? '#4caf50' : ''}"
             />
